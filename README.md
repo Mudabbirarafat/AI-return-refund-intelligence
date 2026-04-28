@@ -1,4 +1,4 @@
-# Mumzworld Returns Intelligence
+# Mumzworld AI Return & Refund Intelligence System (EN+ AR)
 
 **Track A — AI Engineering Intern**
 
@@ -8,6 +8,8 @@ A production-ready return reason classifier for Mumzworld that processes free-te
 
 ## Summary
 
+This project is an AI-powered return and refund intelligence system designed for Mumzworld. It takes customer messages in English, Arabic, or mixed language and classifies the intent (return, refund, exchange), identifies the reason, assigns urgency, and generates structured responses with confidence scores. The system combines rule-based validation with LLM-based reasoning to produce grounded, multilingual outputs while handling uncertainty explicitly.
+
 Mumzworld serves Arabic and English-speaking mothers across the GCC. Return requests arrive as free-text messages in both languages — often vague, sometimes angry, occasionally off-topic. This system:
 
 - **Classifies** the return intent with a confidence score
@@ -15,6 +17,10 @@ Mumzworld serves Arabic and English-speaking mothers across the GCC. Return requ
 - **Escalates honestly** when confidence is below 0.65 rather than guessing
 - **Replies** in the customer's language with a warm, drafted message
 - **Validates** every output against a Pydantic schema — no silent failures
+
+## Video Demo Link: 
+https://www.loom.com/share/d126228a06a64efc876980c68571d67f
+
 
 ---
 
