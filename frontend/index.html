@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mumzworld · Returns Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fef6f0;
+  --bg2:#ffffff;
+  --bg3:#fdf0ea;
+  --bg4:#fce8df;
+  --border:#f2d9ce;
+  --border2:#e8c4b4;
+  --peach:#f4845f;
+  --peach-dark:#d9623c;
+  --peach-light:#fce8df;
+  --peach-glow:rgba(244,132,95,0.12);
+  --lilac:#c9a7d4;
+  --lilac-light:#f0e6f5;
+  --lilac-dark:#9b6eb0;
+  --mint:#7ec8b8;
+  --mint-light:#e4f5f1;
+  --mint-dark:#4fa38f;
+  --blush:#f2a7b0;
+  --blush-light:#fdedf0;
+  --butter:#f7d97a;
+  --butter-light:#fef8e4;
+  --text:#3d2314;
+  --text2:#7a4430;
+  --text3:#a8694e;
+  --text-muted:#c49580;
+  --refund-c:#e05c5c;--refund-bg:#fdeaea;--refund-border:#f5b8b8;
+  --exchange-c:#3ea88a;--exchange-bg:#e3f5f0;--exchange-border:#9fd8cb;
+  --credit-c:#c48a00;--credit-bg:#fef8e0;--credit-border:#f0d070;
+  --escalate-c:#8b5bb5;--escalate-bg:#f3ecfa;--escalate-border:#caaee0;
+  --r:16px;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-ui:'Plus Jakarta Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-ui);min-height:100vh;overflow-x:hidden}
+
+/* Soft floating blobs */
+.blob1{position:fixed;top:-120px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,167,212,0.18) 0%,transparent 70%);pointer-events:none;z-index:0}
+.blob2{position:fixed;bottom:-100px;left:-60px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(126,200,184,0.15) 0%,transparent 70%);pointer-events:none;z-index:0}
+.blob3{position:fixed;top:40%;left:60%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(247,217,122,0.1) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+.wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:48px 24px 96px}
+
+/* ── HEADER ── */
+header{margin-bottom:52px;animation:riseUp 0.7s cubic-bezier(0.16,1,0.3,1) both}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px}
+
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--peach),#f07550);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;box-shadow:0 4px 12px rgba(244,132,95,0.35);
+}
+.logo-text{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--peach-dark);letter-spacing:0.5px}
+
+.live-badge{
+  display:flex;align-items:center;gap:8px;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:7px 16px;
+  font-size:11px;font-weight:600;color:var(--text-muted);
+  font-family:var(--font-mono);letter-spacing:0.5px;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--mint-dark);box-shadow:0 0 0 2px var(--mint-light),0 0 8px var(--mint);animation:heartbeat 2.5s ease infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.3)}28%{transform:scale(1)}}
+
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:0}
+@media(max-width:580px){.hero{grid-template-columns:1fr}}
+
+.hero-text h1{
+  font-family:var(--font-display);
+  font-size:clamp(36px,6vw,58px);
+  font-weight:700;
+  line-height:1.08;
+  color:var(--text);
+  margin-bottom:16px;
+}
+.hero-text h1 em{color:var(--peach);font-style:italic}
+.hero-text h1 .soft{color:var(--text3);font-style:normal}
+
+.tagline{
+  font-size:15px;color:var(--text3);line-height:1.75;
+  max-width:420px;font-weight:400;
+}
+
+/* Stats bubbles */
+.stats{
+  display:flex;flex-direction:column;gap:10px;
+  animation:riseUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+  animation-delay:0.15s;
+}
+@media(max-width:580px){.stats{flex-direction:row;flex-wrap:wrap}}
+.stat-bubble{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:14px 18px;text-align:center;
+  min-width:90px;
+}
+.stat-num{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--peach);line-height:1}
+.stat-label{font-size:10px;color:var(--text-muted);margin-top:4px;font-weight:500;letter-spacing:0.5px}
+
+/* ── INPUT PANEL ── */
+.panel{
+  background:var(--bg2);
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  padding:32px;
+  margin-bottom:20px;
+  box-shadow:0 4px 32px rgba(212,98,60,0.06),0 1px 3px rgba(212,98,60,0.04);
+  animation:riseUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  animation-delay:0.1s;
+}
+
+.field-label{
+  font-size:12px;font-weight:700;letter-spacing:0.8px;
+  text-transform:uppercase;color:var(--text3);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.field-label .dot{width:6px;height:6px;border-radius:50%;background:var(--peach);display:inline-block}
+
+textarea{
+  width:100%;min-height:120px;
+  background:var(--bg3);border:1.5px solid var(--border);
+  border-radius:12px;padding:16px;
+  font-family:var(--font-ui);font-size:15px;line-height:1.75;
+  color:var(--text);resize:vertical;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
+}
+textarea:focus{border-color:var(--peach);box-shadow:0 0 0 4px var(--peach-glow);background:var(--bg2)}
+textarea::placeholder{color:var(--text-muted);font-size:14px}
+
+.row{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
+
+input[type=text]{
+  flex:1;min-width:140px;
+  background:var(--bg3);border:1.5px solid var(--border);
+  border-radius:10px;padding:11px 14px;
+  font-family:var(--font-mono);font-size:13px;
+  color:var(--text);outline:none;transition:border-color 0.2s;
+}
+input[type=text]:focus{border-color:var(--peach)}
+input[type=text]::placeholder{color:var(--text-muted)}
+
+.classify-btn{
+  background:linear-gradient(135deg,var(--peach),#f07550);
+  color:white;border:none;border-radius:12px;
+  padding:13px 30px;font-family:var(--font-ui);
+  font-size:14px;font-weight:700;cursor:pointer;
+  letter-spacing:0.3px;
+  box-shadow:0 4px 16px rgba(244,132,95,0.4);
+  transition:all 0.2s;
+}
+.classify-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(244,132,95,0.5)}
+.classify-btn:active{transform:translateY(0);box-shadow:0 2px 8px rgba(244,132,95,0.3)}
+.classify-btn:disabled{background:var(--border);color:var(--text-muted);box-shadow:none;transform:none;cursor:not-allowed}
+
+.examples-row{margin-top:24px;padding-top:20px;border-top:1.5px dashed var(--border)}
+.examples-label{font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:10px;letter-spacing:0.5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  background:var(--bg3);border:1.5px solid var(--border);
+  border-radius:20px;padding:6px 16px;font-size:12px;
+  font-weight:600;color:var(--text3);cursor:pointer;
+  transition:all 0.15s;
+}
+.chip:hover{border-color:var(--peach);color:var(--peach-dark);background:var(--peach-light);transform:translateY(-1px)}
+
+/* ── LOADING ── */
+.loading{text-align:center;padding:52px 24px;animation:riseUp 0.3s ease}
+.baby-loader{font-size:36px;animation:rock 1.2s ease-in-out infinite;display:inline-block;margin-bottom:16px}
+@keyframes rock{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+.loading p{color:var(--text-muted);font-size:13px;font-weight:500;margin-top:8px}
+.loading .loading-dots::after{content:'...';animation:dots 1.5s steps(4,end) infinite}
+@keyframes dots{0%,100%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+
+/* ── ERROR ── */
+.error-box{background:var(--refund-bg);border:1.5px solid var(--refund-border);border-radius:14px;padding:18px 22px;color:var(--refund-c);font-size:14px;line-height:1.6}
+
+/* ── RESULT ── */
+.result{animation:riseUp 0.5s cubic-bezier(0.16,1,0.3,1) both}
+
+/* Big classification card */
+.class-card{
+  border-radius:20px;padding:28px 30px;
+  margin-bottom:16px;position:relative;overflow:hidden;
+}
+.class-card.refund      {background:var(--refund-bg);  border:1.5px solid var(--refund-border)}
+.class-card.exchange    {background:var(--exchange-bg);border:1.5px solid var(--exchange-border)}
+.class-card.store_credit{background:var(--credit-bg);  border:1.5px solid var(--credit-border)}
+.class-card.escalate    {background:var(--escalate-bg);border:1.5px solid var(--escalate-border)}
+
+/* Decorative circle */
+.class-card::after{
+  content:'';position:absolute;right:-40px;top:-40px;
+  width:160px;height:160px;border-radius:50%;
+  opacity:0.15;
+}
+.class-card.refund::after      {background:var(--refund-c)}
+.class-card.exchange::after    {background:var(--exchange-c)}
+.class-card.store_credit::after{background:var(--credit-c)}
+.class-card.escalate::after    {background:var(--escalate-c)}
+
+.class-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+
+.class-icon{font-size:32px;line-height:1}
+
+.class-info{}
+.class-name{
+  font-family:var(--font-display);
+  font-size:28px;font-weight:700;line-height:1;
+  margin-bottom:4px;
+}
+.class-name.refund      {color:var(--refund-c)}
+.class-name.exchange    {color:var(--exchange-c)}
+.class-name.store_credit{color:var(--credit-c)}
+.class-name.escalate    {color:var(--escalate-c)}
+
+.class-sub{font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:0.5px}
+
+.conf-wrap{margin-left:auto;text-align:right}
+.conf-number{font-family:var(--font-display);font-size:36px;font-weight:700;line-height:1}
+.conf-number.refund      {color:var(--refund-c)}
+.conf-number.exchange    {color:var(--exchange-c)}
+.conf-number.store_credit{color:var(--credit-c)}
+.conf-number.escalate    {color:var(--escalate-c)}
+.conf-sub{font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:0.5px}
+
+.conf-bar{height:6px;background:rgba(0,0,0,0.08);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.conf-fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(0.16,1,0.3,1)}
+.conf-fill.refund      {background:var(--refund-c)}
+.conf-fill.exchange    {background:var(--exchange-c)}
+.conf-fill.store_credit{background:var(--credit-c)}
+.conf-fill.escalate    {background:var(--escalate-c)}
+
+.lang-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.7);border-radius:20px;
+  padding:5px 14px;font-size:12px;font-weight:600;
+  color:var(--text3);border:1px solid rgba(0,0,0,0.06);
+  margin-bottom:14px;
+}
+
+.reasoning-box{
+  background:rgba(255,255,255,0.6);
+  border-radius:10px;padding:14px 16px;
+  font-size:14px;line-height:1.8;color:var(--text2);
+  border-left:3px solid currentColor;
+}
+.reasoning-box.refund      {border-color:var(--refund-c)}
+.reasoning-box.exchange    {border-color:var(--exchange-c)}
+.reasoning-box.store_credit{border-color:var(--credit-c)}
+.reasoning-box.escalate    {border-color:var(--escalate-c)}
+
+/* Escalation alert */
+.esc-alert{
+  background:var(--escalate-bg);border:1.5px solid var(--escalate-border);
+  border-radius:12px;padding:14px 18px;margin-bottom:14px;
+  font-size:13px;color:var(--escalate-c);line-height:1.6;
+}
+.esc-alert strong{display:block;font-size:11px;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;opacity:0.7}
+
+/* Fields grid */
+.section-head{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:0.8px;
+  text-transform:uppercase;color:var(--text3);
+  margin:20px 0 12px;
+}
+.section-head .icon{font-size:16px}
+
+.fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px}
+@media(max-width:500px){.fields-grid{grid-template-columns:1fr}}
+
+.field-card{
+  background:var(--bg2);border:1.5px solid var(--border);
+  border-radius:14px;padding:16px 18px;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.field-card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.fc-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.fc-val{font-size:14px;color:var(--text);line-height:1.5}
+.fc-val.empty{color:var(--text-muted);font-style:italic;font-size:13px}
+
+.pill{display:inline-block;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;letter-spacing:0.3px}
+.pill.positive  {background:var(--mint-light);    color:var(--mint-dark)}
+.pill.neutral   {background:var(--bg3);           color:var(--text-muted);border:1px solid var(--border)}
+.pill.frustrated{background:var(--butter-light);  color:#b07800}
+.pill.angry     {background:var(--refund-bg);      color:var(--refund-c)}
+.pill.low       {background:var(--mint-light);    color:var(--mint-dark)}
+.pill.medium    {background:var(--butter-light);  color:#b07800}
+.pill.high      {background:var(--refund-bg);      color:var(--refund-c)}
+
+/* Reply */
+.reply-card{
+  background:var(--bg2);border:1.5px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 2px 16px rgba(212,98,60,0.05);
+}
+.reply-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;background:linear-gradient(90deg,var(--peach-light),var(--lilac-light));
+  border-bottom:1.5px solid var(--border);
+}
+.reply-top-label{font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text3);display:flex;align-items:center;gap:8px}
+.copy-btn{
+  background:white;border:1.5px solid var(--border);
+  border-radius:8px;padding:6px 16px;font-size:12px;
+  font-weight:700;color:var(--text3);cursor:pointer;
+  transition:all 0.15s;letter-spacing:0.3px;
+}
+.copy-btn:hover{border-color:var(--peach);color:var(--peach-dark);background:var(--peach-light)}
+.reply-body{padding:24px;font-size:15px;line-height:1.9;color:var(--text2)}
+.reply-body[dir="rtl"]{font-size:16px}
+
+/* Footer */
+footer{
+  text-align:center;margin-top:60px;
+  font-size:12px;color:var(--text-muted);
+  font-weight:500;display:flex;align-items:center;
+  justify-content:center;gap:10px;
+}
+.footer-hearts{color:var(--blush);font-size:14px}
+
+@keyframes riseUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="blob1"></div>
+<div class="blob2"></div>
+<div class="blob3"></div>
+<div class="wrap">
+
+  <header>
+    <div class="topbar">
+      <div class="logo">
+        <div class="logo-mark">🌸</div>
+        <span class="logo-text">Mumzworld</span>
+      </div>
+      <div class="live-badge">
+        <div class="live-dot"></div>
+        Returns AI · Live
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Returns <em>Intelligence</em><br><span class="soft"></span></h1>
+        <p class="tagline">Paste a customer's return reason in English or Arabic — get an instant classification, structured data, and a warm drafted reply.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-bubble">
+          <div class="stat-num">EN</div>
+          <div class="stat-label">English</div>
+        </div>
+        <div class="stat-bubble">
+          <div class="stat-num">AR</div>
+          <div class="stat-label">عربي</div>
+        </div>
+        <div class="stat-bubble">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Classes</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="panel">
+    <div class="field-label"><span class="dot"></span> Customer Return Reason</div>
+    <textarea id="return-text" placeholder="Paste customer message here — English or Arabic&#10;&#10;e.g. The stroller arrived with a broken wheel. I want a full refund.&#10;أو: المنتج وصلني مكسور، أريد استرداد المبلغ."></textarea>
+    <div class="row">
+      <input type="text" id="order-id" placeholder="Order ID (optional)"/>
+      <button class="classify-btn" id="classify-btn" onclick="classify()">Classify Return →</button>
+    </div>
+    <div class="examples-row">
+      <div class="examples-label">✨ Try an example</div>
+      <div class="chips">
+        <span class="chip" onclick="setExample('en-refund')">🇬🇧 Broken item — refund</span>
+        <span class="chip" onclick="setExample('en-exchange')">🇬🇧 Wrong size — exchange</span>
+        <span class="chip" onclick="setExample('en-escalate')">🇬🇧 Ambiguous</span>
+        <span class="chip" onclick="setExample('ar-refund')">🇸🇦 طلب استرداد</span>
+        <span class="chip" onclick="setExample('ar-exchange')">🇸🇦 طلب استبدال</span>
+        <span class="chip" onclick="setExample('off-topic')">❓ Off-topic</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="output"></div>
+
+  <footer>
+    <span class="footer-hearts">♥</span>
+    Mumzworld Returns Intelligence · EN / AR · Prototype
+    <span class="footer-hearts">♥</span>
+  </footer>
+</div>
+
+<script>
+const EXAMPLES={
+  'en-refund':"The baby monitor I ordered stopped working completely after 48 hours. The screen is blank and won't turn on. I need a full refund.",
+  'en-exchange':"I ordered the blue nursing pillow in medium but received a pink one in large. Can I exchange it for the right one please?",
+  'en-escalate':"The product looks slightly different from the photo, not sure if it's defective or I just don't like it. Maybe exchange? Or credit? Not sure.",
+  'ar-refund':"المنتج وصلني وهو مكسور من الكرتونة. الشاحن لا يعمل من أول يوم. أريد استرداد كامل المبلغ.",
+  'ar-exchange':"طلبت مقاس ٣ بس وصلني مقاس ٥. أبغى أبدله بالمقاس الصحيح.",
+  'off-topic':"How do I make baby formula? What temperature should the water be?"
+};
+const CLASS_META={
+  refund:     {icon:'↩',label:'Refund',     sub:'Money back to customer'},
+  exchange:   {icon:'⇄',label:'Exchange',   sub:'Replace with correct item'},
+  store_credit:{icon:'◎',label:'Store Credit',sub:'Wallet or voucher credit'},
+  escalate:   {icon:'⚑',label:'Escalate',   sub:'Needs human review'},
+};
+
+function setExample(k){document.getElementById('return-text').value=EXAMPLES[k]}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+async function classify(){
+  const text=document.getElementById('return-text').value.trim();
+  const orderId=document.getElementById('order-id').value.trim();
+  const out=document.getElementById('output');
+  const btn=document.getElementById('classify-btn');
+  if(!text){out.innerHTML='<div class="error-box">Please enter a return reason before classifying.</div>';return}
+  btn.disabled=true;
+  out.innerHTML=`<div class="loading"><div class="baby-loader">🍼</div><p>Analysing return reason<span class="loading-dots"></span></p></div>`;
+  try{
+    const res=await fetch('/classify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,order_id:orderId||null})});
+    if(!res.ok){const e=await res.json().catch(()=>({detail:res.statusText}));throw new Error(e.detail||`HTTP ${res.status}`)}
+    render(await res.json());
+  }catch(e){
+    out.innerHTML=`<div class="error-box">⚠ ${esc(e.message)}<br><small style="opacity:0.7;display:block;margin-top:4px">Make sure the server is running and OPENROUTER_API_KEY is set.</small></div>`;
+  }finally{btn.disabled=false}
+}
+
+function render(d){
+  const cls=d.classification;
+  const m=CLASS_META[cls];
+  const isAr=d.language_detected==='ar';
+  const dir=isAr?'rtl':'ltr';
+  const pct=Math.round(d.confidence*100);
+  const ex=d.extracted||{};
+  const langLabel={en:'🇬🇧 English',ar:'🇸🇦 Arabic',other:'🌐 Other'}[d.language_detected]||d.language_detected;
+
+  const escHtml=(cls==='escalate'&&d.escalate_reason)
+    ?`<div class="esc-alert"><strong>⚑ Escalation Reason</strong>${esc(d.escalate_reason)}</div>`:'';
+
+  function fc(label,val,type){
+    let v;
+    if(!val||val===''){v='<span class="fc-val empty">— not mentioned</span>'}
+    else if(type==='pill'){v=`<span class="pill ${val}">${val}</span>`}
+    else{v=`<span class="fc-val" dir="${dir}">${esc(val)}</span>`}
+    return `<div class="field-card"><div class="fc-label">${label}</div>${v}</div>`;
+  }
+
+  document.getElementById('output').innerHTML=`
+  <div class="result">
+    <div class="class-card ${cls}">
+      <div class="class-top">
+        <div class="class-icon">${m.icon}</div>
+        <div class="class-info">
+          <div class="class-name ${cls}">${m.label}</div>
+          <div class="class-sub">${m.sub}</div>
+        </div>
+        <div class="conf-wrap">
+          <div class="conf-number ${cls}">${pct}%</div>
+          <div class="conf-sub">Confidence</div>
+        </div>
+      </div>
+      <div class="conf-bar"><div class="conf-fill ${cls}" id="conf-fill" style="width:0%"></div></div>
+      <div class="lang-pill">${langLabel}</div>
+      ${escHtml}
+      <div class="reasoning-box ${cls}" dir="${dir}">${esc(d.reasoning)}</div>
+    </div>
+
+    <div class="section-head"><span class="icon">🔍</span> Extracted Fields</div>
+    <div class="fields-grid">
+      ${fc('Product Issue',ex.product_issue)}
+      ${fc('Item Mentioned',ex.item_mentioned)}
+      ${fc('Sentiment',ex.customer_sentiment,'pill')}
+      ${fc('Urgency',ex.urgency,'pill')}
+      ${fc('Resolution Requested',ex.resolution_preference)}
+    </div>
+
+    <div class="section-head"><span class="icon">💌</span> Suggested Reply</div>
+    <div class="reply-card">
+      <div class="reply-top">
+        <div class="reply-top-label">✉️ Draft Reply · ${isAr?'Arabic / عربي':'English'}</div>
+        <button class="copy-btn" onclick="copyReply(this)">Copy</button>
+      </div>
+      <div class="reply-body" dir="${dir}" id="reply-text">${esc(d.suggested_reply)}</div>
+    </div>
+  </div>`;
+
+  requestAnimationFrame(()=>{
+    setTimeout(()=>{const f=document.getElementById('conf-fill');if(f)f.style.width=pct+'%'},80);
+  });
+}
+
+function copyReply(btn){
+  const t=document.getElementById('reply-text')?.innerText||'';
+  navigator.clipboard.writeText(t).then(()=>{btn.textContent='Copied ✓';setTimeout(()=>btn.textContent='Copy',2000)});
+}
+
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')classify()});
+</script>
+</body>
+</html>

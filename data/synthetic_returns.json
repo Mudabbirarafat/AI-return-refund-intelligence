@@ -1,0 +1,142 @@
+[
+  {
+    "id": "EN-001",
+    "text": "The stroller I received has a broken wheel. It arrived damaged in the box. I want my money back.",
+    "expected_classification": "refund",
+    "expected_language": "en",
+    "notes": "Clear defect + explicit refund request. Easy case."
+  },
+  {
+    "id": "EN-002",
+    "text": "I ordered the size 3 diapers but received size 5. I'd like to exchange them for the correct size.",
+    "expected_classification": "exchange",
+    "expected_language": "en",
+    "notes": "Wrong item delivered. Explicit exchange request."
+  },
+  {
+    "id": "EN-003",
+    "text": "The product is fine but I changed my mind. Can I get store credit to use on my next purchase?",
+    "expected_classification": "store_credit",
+    "expected_language": "en",
+    "notes": "Explicit store credit ask. No defect."
+  },
+  {
+    "id": "EN-004",
+    "text": "I want to return this.",
+    "expected_classification": "escalate",
+    "expected_language": "en",
+    "notes": "Too vague — no reason given. Should escalate."
+  },
+  {
+    "id": "EN-005",
+    "text": "The baby monitor stopped working after two days. The screen just goes black. I need a replacement urgently — my newborn needs monitoring.",
+    "expected_classification": "exchange",
+    "expected_language": "en",
+    "notes": "Defective item + replacement request. High urgency."
+  },
+  {
+    "id": "EN-006",
+    "text": "This is absolutely outrageous. I have been waiting for my order for THREE WEEKS and nobody is helping me. I want a full refund AND compensation NOW.",
+    "expected_classification": "refund",
+    "expected_language": "en",
+    "notes": "Angry customer, delayed delivery. Refund + compensation ask — primary signal is refund."
+  },
+  {
+    "id": "EN-007",
+    "text": "How do I make pancakes?",
+    "expected_classification": "escalate",
+    "expected_language": "en",
+    "notes": "Completely off-topic. Must escalate, not classify as return."
+  },
+  {
+    "id": "EN-008",
+    "text": "The colour is slightly different from the website photo. It's not broken or anything, I just don't love it. Maybe store credit? Or an exchange? I'm not sure.",
+    "expected_classification": "escalate",
+    "expected_language": "en",
+    "notes": "Multiple conflicting signals + customer uncertainty. Low confidence expected."
+  },
+  {
+    "id": "EN-009",
+    "text": "I never received my package. The tracking shows delivered but it wasn't at my door. I want a refund.",
+    "expected_classification": "refund",
+    "expected_language": "en",
+    "notes": "Non-delivery + explicit refund. Clear case."
+  },
+  {
+    "id": "EN-010",
+    "text": "The nursing pillow is great! I actually want to buy another one. Can I use my loyalty points?",
+    "expected_classification": "escalate",
+    "expected_language": "en",
+    "notes": "Not a return at all — loyalty points inquiry. Must escalate."
+  },
+  {
+    "id": "AR-001",
+    "text": "المنتج وصلني مكسور من الكرتون. أريد استرداد المبلغ كاملاً.",
+    "expected_classification": "refund",
+    "expected_language": "ar",
+    "notes": "Arabic: product arrived broken, wants full refund. Clear case."
+  },
+  {
+    "id": "AR-002",
+    "text": "طلبت مقاس صغير لكن وصلني مقاس كبير. أبغى أبدل المنتج.",
+    "expected_classification": "exchange",
+    "expected_language": "ar",
+    "notes": "Arabic: wrong size, wants exchange. Clear case."
+  },
+  {
+    "id": "AR-003",
+    "text": "المنتج كويس بس ما يناسبني. أقدر أحصل على رصيد في المتجر بدل الإرجاع؟",
+    "expected_classification": "store_credit",
+    "expected_language": "ar",
+    "notes": "Arabic: product fine, wants store credit. Clear case."
+  },
+  {
+    "id": "AR-004",
+    "text": "أبي أرجع",
+    "expected_classification": "escalate",
+    "expected_language": "ar",
+    "notes": "Arabic: too vague, no product or reason. Must escalate."
+  },
+  {
+    "id": "AR-005",
+    "text": "الشاحن ما يشتغل من أول يوم. المنتج معطل وأحتاج بديل بسرعة.",
+    "expected_classification": "exchange",
+    "expected_language": "ar",
+    "notes": "Arabic: defective from day one, needs replacement urgently."
+  },
+  {
+    "id": "AR-006",
+    "text": "أنا مو راضية عن الخدمة وأريد مدير يتواصل معي",
+    "expected_classification": "escalate",
+    "expected_language": "ar",
+    "notes": "Arabic: escalation request to manager. Not a standard return type."
+  },
+  {
+    "id": "AR-007",
+    "text": "البضاعة ما وصلت ومضت أسبوعين على الطلب، أريد استرجاع فلوسي.",
+    "expected_classification": "refund",
+    "expected_language": "ar",
+    "notes": "Arabic: non-delivery after 2 weeks, wants money back."
+  },
+  {
+    "id": "AR-008",
+    "text": "المنتج مختلف عن الصورة بس مو معطل، ما أدري إذا أرجعه أو أبدله",
+    "expected_classification": "escalate",
+    "expected_language": "ar",
+    "notes": "Arabic: ambiguous, customer unsure. Should escalate due to low confidence."
+  },
+  {
+    "id": "MIXED-001",
+    "text": "Product is defective منتج معطل I want refund أريد استرداد",
+    "expected_classification": "refund",
+    "expected_language": "ar",
+    "notes": "Mixed EN+AR. Arabic chars > 20% so detected as AR. Clear refund signal in both languages."
+  },
+  {
+    "id": "EDGE-001",
+    "text": "!!!",
+    "expected_classification": "escalate",
+    "expected_language": "en",
+    "notes": "Symbols only. No classifiable content. Must escalate gracefully."
+  }
+]
